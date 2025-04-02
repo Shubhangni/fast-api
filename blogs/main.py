@@ -10,7 +10,6 @@ from hashing import Hash
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
-## this function returns a database session.
 def get_db():
     db = sessionLocal()
     try:
