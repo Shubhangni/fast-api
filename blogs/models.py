@@ -1,5 +1,7 @@
 from database import Base
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy.orm import relationship
+
 # Define your models here
 class Blog(Base):
     __tablename__ = 'blogs'
@@ -9,6 +11,8 @@ class Blog(Base):
     content = Column(String(1000))
     views = Column(Integer, default=0)
     published = Column(Boolean, default=False)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    creator = relationship("User", back_populates="blogs")
 
 class User(Base):
     __tablename__ = 'users'
@@ -17,4 +21,5 @@ class User(Base):
     password = Column(String(255))
     email = Column(String(255), unique=True)
     is_active = Column(Boolean, default=True)
+    blogs = relationship("Blog", back_populates="creator")
 
