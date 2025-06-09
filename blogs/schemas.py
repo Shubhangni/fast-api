@@ -15,6 +15,8 @@ class User(BaseModel):
     email: str
     is_active: Optional[bool] = True
 
+
+
 class ShowUser(BaseModel):
     username:str
     email:str
@@ -23,6 +25,7 @@ class ShowUser(BaseModel):
         orm_mode = True
 
 class ShowBlog(BaseModel):
+    id: int
     title: str
     content: str
     author: str
@@ -30,5 +33,13 @@ class ShowBlog(BaseModel):
     class Config():
         orm_mode = True
 
+class Login(BaseModel):
+    username : str
+    password : str
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
+class TokenData(BaseModel):
+    email: str | None = None
